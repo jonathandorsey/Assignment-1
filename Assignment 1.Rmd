@@ -1,0 +1,25 @@
+---
+title: "Assignment 1"
+author: "Jonathan Dorsey"
+date: "January 18, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Install Packages and Download Data
+
+```{r}
+library(tidyverse)
+
+agencies <- read_csv("agencies.csv")
+launches <- read_csv("launches.csv")
+nutrients <- read_csv("usda_nutrients.csv")
+
+```
+
+1. Data Wrangling
+
+

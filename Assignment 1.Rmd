@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
+library(stringr)
 
 agencies <- read_csv("agencies.csv")
 launches <- read_csv("launches.csv")
@@ -21,5 +22,31 @@ nutrients <- read_csv("usda_nutrients.csv")
 ```
 
 1. Data Wrangling
+
+```{r}
+
+
+agencies_df <- agencies %>% 
+  select(agency_type, tstart, count) %>% 
+  filter(tstart != "-")
+
+agencies_df$tstart <- sub(" .*", "", agencies_df$tstart)
+
+agencies_df2 <- agencies_df %>% 
+  mutate(tstart = gsub("[[:punct:]]", "", tstart)) %>% 
+  mutate(tstart = gsub("s", "", tstart))
+
+```
+
+2. Graph the data
+```{r}
+
+#ggplot(agencies_df2, aes(x = tstart, y = count)) +
+   # geom_bar(position = "stack", aes(group_by = agency_type, fill = agency_type))
+
+ggplot(agencies_df, aes(x = tstart, y = count))+
+  geom_line()
+
+```
 
 
